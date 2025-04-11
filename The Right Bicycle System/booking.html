@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Bike</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script>
+    function toggleDurationInput() {
+      const durationInput = document.getElementById('duration-input');
+      durationInput.style.display = 'block';
+    }
+
+    function calculateTotalPrice() {
+      const durationType = document.getElementById('rental-duration').value;
+      const durationAmount = document.getElementById('duration-amount').value;
+      let totalPrice = 0;
+
+      if (durationType === 'hours') {
+        totalPrice = durationAmount * 3;
+      } else if (durationType === 'weeks') {
+        totalPrice = durationAmount * 10;
+      }
+
+      document.getElementById('total-price').innerText = `Total Price: RM ${totalPrice.toFixed(2)}`;
+      document.getElementById('hidden-total-price').value = totalPrice.toFixed(2);
+    }
+  </script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <nav class="nav" id="nav">
+      <a href="dashboard_customer.html"><img src="bikelogo.png" class="logo" alt="site logo"/></a>
+      <div class="nav_menu" id="nav-menu">
+        <ul class="nav_list">
+
+            <li class="nav_item">
+              <a href="profile.php">Profile</a>
+            </li>
+
+        </ul>
+      </div>
+      <div class="book-cta"><a href="logout.php">Logout</a></div>
+      <div class="nav_toggle" id="nav-toggle"><i class="fas fa-bars icon"></i></div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="section">
+      <h1>Book a bike</h1>
+      </div>
+    <!-- Booking Form Section -->
+    <div class="section">
+        <div class="booking-form">
+          <form action="process_booking.php" method="POST" onsubmit="calculateTotalPrice()">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="id_stud">Matrix:</label>
+              <input type="text" id="id_stud" name="id_stud" required>
+            </div>
+            <div class="form-group">
+              <label for="fon_stud">Phone Number:</label>
+              <input type="text" id="fon_stud" name="fon_stud" required>
+            </div>
+            <div class="form-group">
+              <label for="bike-type">Select Bike Type:</label>
+              <select id="bike-type" name="bike-type" required>
+                <option value="1">Blue Bike</option>
+                <option value="2">Gray Bike</option>
+                <option value="3">Green Bike</option>
+                <option value="4">Yellow Bike</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="rental-date">Rental Date:</label>
+              <input type="date" id="rental-date" name="rental-date" required>
+            </div>
+            <div class="form-group">
+              <label for="rental-duration">Rental Duration:</label>
+              <select id="rental-duration" name="rental-duration" required onchange="toggleDurationInput()">
+                <option value="hours">Hours</option>
+                <option value="weeks">Weeks</option>
+              </select>
+            </div>
+            <div class="form-group" id="duration-input" style="display: none;">
+              <label for="duration-amount">Enter Duration:</label>
+              <input type="number" id="duration-amount" name="duration-amount" min="1" required oninput="calculateTotalPrice()">
+            </div>
+            <div class="form-group">
+              <label for="return-date">Return Date:</label>
+              <input type="date" id="return-date" name="return-date" required>
+            </div>
+            <div class="form-group">
+              <p id="total-price">Total Price: RM 0.00</p>
+              <input type="hidden" id="hidden-total-price" name="total-price">
+            </div>
+            <div class="form-group">
+              <button type="submit" class="submit-btn">Submit Booking</button>
+            </div>
+          </form>
+        </div>
+    </div>
+    </section>
+  </main>
+
+   <!--FOOTER-->
+   <footer class="footer2">
+    <div class="container">
+      <div class="row">
+        <div class="footer-col">
+          <div class="footer-about">
+            <img
+            src="logofoot.png"
+            alt="footer logo"
+            class="footer-logo"
+            />
+            <p class="description-foot">
+              Universiti Tun Hussein Onn Malaysia (UTHM),
+              86400 Parit Raja, Batu Pahat , Johor, Malaysia
+            </p>
+        </div> 
+        </div>
+        <div class="footer-col">
+          <h4>company</h4>
+          <ul>
+            <li><a href="#">about us</a></li>
+            <li><a href="#">our services</a></li>
+            <li><a href="#">privacy policy</a></li>
+            <li><a href="#">affiliate program</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>get help</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">returns</a></li>
+            <li><a href="#">order status</a></li>
+            <li><a href="#">payment options</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>follow us</h4>
+          <div class="social-links">
+            <img src="instagram.png">
+            <img src="ficon.png">
+            <img src="twitter.png">
+          </div>
+        </div>
+      </div>
+    </div>
+ </footer>
+</body>
+</html>
